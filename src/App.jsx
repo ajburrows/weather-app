@@ -1,15 +1,18 @@
 import { getWeather } from "./api"
 import { useEffect, useState } from "react"
+import TempLineGraph from "./TempLineGraph"
+import { Chart } from "chart.js"
 
 function App() {
   const [weather, setWeather] = useState({})
+  const temperatures = weather.temperature2m
+  const times = weather.time
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
         const data = await getWeather()
-        setWeather(data)
-        console.log(data.hourly)
+        setWeather(data.hourly)
       } catch(err) {
         console.error("Error fetching weather data: ", err)
       }
@@ -18,8 +21,13 @@ function App() {
     fetchWeather()
   }, [])
 
+  const temps = [10,20,30,40,50]
+
   return (
-    <p>testing</p>
+    <>
+      <p>testing</p>
+      <TempLineGraph />
+    </>
   )
 }
 
