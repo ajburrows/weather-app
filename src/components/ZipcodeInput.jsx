@@ -3,7 +3,6 @@ import React, { useState } from "react";
 function ZipcodeInput({ zipCode, onZipCodeChange, submitHelper }) {
   const handleChange = (event) => {
     const input = event.target.value
-    console.log(input)
     onZipCodeChange(input)
   };
 
