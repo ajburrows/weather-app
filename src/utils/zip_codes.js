@@ -1,3 +1,9 @@
+/*
+  This is obviously a large file that will slow the site down.
+  In the future, I may move this to a database to speed things up,
+  but for now I'm focused on getting the front-end up and running.
+*/
+
 const citiesByZip = {
   "00601": {
     "city": "Adjuntas",

@@ -3,5 +3,6 @@
 }
 
 .line-graph-container {
-  max-width: 50%;
+  width: 700px;
+  margin-bottom: 30px;
 }

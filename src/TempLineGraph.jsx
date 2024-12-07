@@ -42,6 +42,7 @@ const TempLineGraph = ({ temperatures, times }) => {
         return monthDay
     }
 
+
     const options = {
         scales: {
             x: {
