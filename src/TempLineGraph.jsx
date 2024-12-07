@@ -22,25 +22,54 @@ ChartJS.register(
   Legend
 );
 
-const TempLineGraph = () => {
-  const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-    datasets: [
-      {
-        label: 'Sales',
-        data: [65, 59, 80, 81, 56, 72],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-      }
-    ]
-  };
+//TODO: accept temperature and time inputs
+//[65, 59, 80, 81, 56, 72]
+//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
 
-  return (
-    <div>
-      <Line data={data} />
-    </div>
-  );
+const TempLineGraph = ({ temperatures, times }) => {
+
+    function getHourOfIndex(index){
+        const timestamp = JSON.stringify(times[index])
+        const time = timestamp.split("T")[1]
+        const hour = time.split(":")[0]
+        return parseInt(hour)
+    }
+
+    function getDayOfIndex(index){
+        const timestamp = JSON.stringify(times[index])
+        const date = timestamp.split("T")[0]
+        const monthDay = date.substring(6)
+        return monthDay
+    }
+
+    console.log(`getDayOfIndex(0): ${getDayOfIndex(0)}`)
+    const options = {
+        scales: {
+            x: {
+                ticks: {
+                    callback: (value, index) => (getHourOfIndex(index) % 24 === 0 ? getDayOfIndex(index) : ''),
+                },
+            },
+        },
+    };
+
+    const data = {
+        labels: times,
+        datasets: [
+        {
+            label: 'Temperatures (F)',
+            data: temperatures,
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.2
+        }]
+    };
+
+    return (
+        <div className='line-graph-container'>
+        <Line data={data} options={options}/>
+        </div>
+    );
 };
 
 export default TempLineGraph;

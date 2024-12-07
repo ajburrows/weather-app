@@ -23,10 +23,16 @@ function App() {
 
   const temps = [10,20,30,40,50]
 
+  const tempsArray = temperatures ? Object.values(temperatures) : null
+  const timesArray = times ? Object.values(times) : null
+  
   return (
     <>
       <p>testing</p>
-      <TempLineGraph />
+      {temperatures && times 
+        ? <TempLineGraph temperatures={tempsArray} times={timesArray} />
+        : null
+      }
     </>
   )
 }

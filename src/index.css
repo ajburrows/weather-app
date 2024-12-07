@@ -1,3 +1,7 @@
 #root {
   font-family: "Inter";
 }
+
+.line-graph-container {
+  max-width: 50%;
+}
