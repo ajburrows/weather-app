@@ -42,7 +42,6 @@ const TempLineGraph = ({ temperatures, times }) => {
         return monthDay
     }
 
-    console.log(`getDayOfIndex(0): ${getDayOfIndex(0)}`)
     const options = {
         scales: {
             x: {
@@ -61,7 +60,9 @@ const TempLineGraph = ({ temperatures, times }) => {
             data: temperatures,
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
-            tension: 0.2
+            tension: 0.2,
+            pointRadius: 2,
+            hoverRadius: 4
         }]
     };
 
