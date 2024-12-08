@@ -13,7 +13,7 @@ function ZipcodeInput({ zipCode, onZipCodeChange, submitHelper }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="zip-code-form" onSubmit={handleSubmit}>
       <label htmlFor="zipcode">Enter ZIP Code:</label>
       <input
         id="zipcode"

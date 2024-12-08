@@ -34,11 +34,18 @@ function App() {
 
   return (
     <>
-      {temperatures && times 
-        ? <TempLineGraph temperatures={tempsArray} times={timesArray} />
-        : null
-      }
-      <ZipcodeInput onZipCodeChange={setZipCode} zipCode={zipCode} submitHelper={fetchWeather} />
+      <header>
+        <h1>Recent & Forecasted Weather</h1>
+      </header>
+      <div className="main">
+        <section className="data-container">
+          {temperatures && times 
+            ? <TempLineGraph temperatures={tempsArray} times={timesArray} />
+            : null
+          }
+          <ZipcodeInput onZipCodeChange={setZipCode} zipCode={zipCode} submitHelper={fetchWeather} />
+        </section>
+      </div>
     </>
   )
 }
