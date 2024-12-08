@@ -39,16 +39,6 @@ export async function getWeather(lat=37.554, lng=-122.313){
         },
     };
 
-    // `weatherData` now contains a simple structure with arrays for datetime and weather data
-    /*
-    for (let i = 0; i < weatherData.hourly.time.length; i++) {
-        console.log(
-            weatherData.hourly.time[i].toISOString(),
-            weatherData.hourly.temperature2m[i]
-        );
-    }
-    */
-
     return weatherData
 
 

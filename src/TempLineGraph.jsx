@@ -8,7 +8,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  plugins
 } from 'chart.js';
 
 // Register required Chart.js components
@@ -29,17 +30,13 @@ ChartJS.register(
 const TempLineGraph = ({ temperatures, times }) => {
 
     function getHourOfIndex(index){
-        const timestamp = JSON.stringify(times[index])
-        const time = timestamp.split("T")[1]
-        const hour = time.split(":")[0]
-        return parseInt(hour)
+        const time = times[index]
+        return time.split(" ")[1].substring(0,2)
     }
 
     function getDayOfIndex(index){
-        const timestamp = JSON.stringify(times[index])
-        const date = timestamp.split("T")[0]
-        const monthDay = date.substring(6)
-        return monthDay
+        const time = times[index]
+        return time.split(" ")[0].substring(0,5)
     }
 
 
@@ -55,6 +52,16 @@ const TempLineGraph = ({ temperatures, times }) => {
                     color: (context) => {
                         return context.tick && context.tick.label ? 'rgba(0,0,0,0.1)' : null
                     }
+                },
+            },
+        },
+        
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    title: function (context) {
+                        return `Time: ${context[0].label}`; // Customize the tooltip title
+                    },
                 },
             },
         },

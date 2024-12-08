@@ -2,7 +2,7 @@ import { getWeather } from "./api"
 import { useEffect, useState } from "react"
 import TempLineGraph from "./TempLineGraph"
 import ZipcodeInput from "./components/ZipcodeInput"
-import { getCoordsFromZip } from "./utils/utils"
+import { getCoordsFromZip, processTimes } from "./utils/utils"
 
 function App() {
   const [weather, setWeather] = useState({})
@@ -31,8 +31,9 @@ function App() {
   }, [])
 
   const tempsArray = temperatures ? Object.values(temperatures) : null
-  const timesArray = times ? Object.values(times) : null
+  const timesArray = times ? processTimes(Object.values(times)) : null
 
+  console.log(timesArray)
 
   return (
     <>
