@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TextField, Button } from '@mui/material'
 
 function ZipcodeInput({ zipCode, onZipCodeChange, submitHelper }) {
   const handleChange = (event) => {
@@ -6,24 +7,28 @@ function ZipcodeInput({ zipCode, onZipCodeChange, submitHelper }) {
     onZipCodeChange(input)
   };
 
-  function handleSubmit(event){
-    event.preventDefault()
-    const zipInput = event.target.elements[0].value
-    submitHelper(zipInput)
-  }
-
   return (
-    <form className="zip-code-form" onSubmit={handleSubmit}>
-      <label htmlFor="zipcode">Enter ZIP Code:</label>
-      <input
-        id="zipcode"
-        type="text"
-        value={zipCode ? zipCode : ""}
+    <div className="zip-code-input-form">
+      <TextField
+        id="outlined-based"
+        label="Zip code"
+        variant="outlined"
+        helperText="e.g. 98101"
+        value={zipCode}
+        onKeyDown={(event) => {event.key === "Enter" ? submitHelper(zipCode) : null}}
         onChange={handleChange}
-        placeholder="e.g. 98101"
       />
-      <button type="submit">Submit</button>
-    </form>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => submitHelper(zipCode)}
+        style={{ marginLeft: "10px",
+                 marginBottom: "20px"
+         }}
+      >
+        Submit
+      </Button>
+    </div>
   );
 }
 

@@ -23,9 +23,7 @@ ChartJS.register(
   Legend
 );
 
-//TODO: accept temperature and time inputs
-//[65, 59, 80, 81, 56, 72]
-//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+//TODO: get current date and time, and render a vertical line on the graph to mark that point
 
 const TempLineGraph = ({ temperatures, times }) => {
 
@@ -66,7 +64,8 @@ const TempLineGraph = ({ temperatures, times }) => {
             label: 'Temperatures (F)',
             data: temperatures,
             fill: false,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: 'rgba(25,118,210, 0.8)',
+            backgroundColor: 'rgba(25,118,210, 0.2)',
             tension: 0.2,
             pointRadius: 2,
             hoverRadius: 4

@@ -12,6 +12,8 @@ function App() {
   const zipObj = zipCode && zipCode.length === 5 ? getCoordsFromZip(zipCode) : null
   const lat = zipObj ? zipObj.lat : null
   const lng = zipObj ? zipObj.lng : null
+  
+  console.log(`zip: ${zipCode}`)
 
   async function fetchWeather() {
     try {
