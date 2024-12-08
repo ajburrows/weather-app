@@ -22,6 +22,7 @@ with open(input_csv, 'r', encoding='utf-8') as csvfile:
 
         # Add an entry for each ZIP code
         zip_data[zip_code] = {
+                "zip": zip_code,
                 "city": city,
                 "state": state,
                 "lat": lat,

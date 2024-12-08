@@ -35,11 +35,10 @@ const datesDictionary = {
 }
 
 
-const TempLineGraph = ({ temperatures, times }) => {
+const TempLineGraph = ({ temperatures, times, city, state }) => {
 
     function isPresentTime(index){
         const dateObj = new Date()
-        console.log(dateObj)
         const year = dateObj.getFullYear()
         const month = dateObj.getMonth()
         const date = dateObj.getDate()
@@ -57,13 +56,12 @@ const TempLineGraph = ({ temperatures, times }) => {
         return entryTimeStr == dateTimeStr
     }
 
-    console.log(isPresentTime(84))
 
     function getHourOfIndex(index){
         // add 5 for Eastern Time
         return times[index].getUTCHours()
     }
-    //Tue[0]: 2, Wed[5]: 3, Sat[85]: 6, Sun[101]: 0, Mon[130]: 1 
+
     function getDayOfIndex(index){
         return datesDictionary[times[index].getUTCDay()]
     }
@@ -98,6 +96,19 @@ const TempLineGraph = ({ temperatures, times }) => {
                 },
             },
         },
+        plugins: {
+            title: {
+                display: true,
+                text: `${city}, ${state}`,
+                font: {
+                    size: 20,
+                    family: "Inter"
+                },
+                padding: {
+                    top: 10,
+                }
+            }
+        }
     };
 
     const data = {
