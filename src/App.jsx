@@ -2,7 +2,7 @@ import { getWeather } from "./api"
 import { useEffect, useState } from "react"
 import TempLineGraph from "./TempLineGraph"
 import ZipcodeInput from "./components/ZipcodeInput"
-import { getCoordsFromZip, processTimes } from "./utils/utils"
+import { getCoordsFromZip, reduceTimeData } from "./utils/utils"
 
 function App() {
   const [weather, setWeather] = useState({})
@@ -12,8 +12,6 @@ function App() {
   const zipObj = zipCode && zipCode.length === 5 ? getCoordsFromZip(zipCode) : null
   const lat = zipObj ? zipObj.lat : null
   const lng = zipObj ? zipObj.lng : null
-
-  console.log(zipObj)
 
   async function fetchWeather() {
     try {
@@ -30,10 +28,9 @@ function App() {
     fetchWeather()
   }, [])
 
+  // These arrays contain the data to be plotted. Times are the horizontal axis and temps are the vertical axis
   const tempsArray = temperatures ? Object.values(temperatures) : null
-  const timesArray = times ? processTimes(Object.values(times)) : null
-
-  console.log(timesArray)
+  const timesArray = times ? reduceTimeData(Object.values(times)) : null
 
   return (
     <>

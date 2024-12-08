@@ -44,24 +44,16 @@ const TempLineGraph = ({ temperatures, times }) => {
         scales: {
             x: {
                 ticks: {
+                    // Only place a label on the horizontal axis if the time is 00:00
                     callback: (value, index) => (getHourOfIndex(index) % 24 === 0 ? getDayOfIndex(index) : ''),
                     autoSkip: false,
                 },
                 grid:{
+                    // Only draw a vertical line on the chart background if a label is there
                     drawOnChartArea: true,
                     color: (context) => {
                         return context.tick && context.tick.label ? 'rgba(0,0,0,0.1)' : null
                     }
-                },
-            },
-        },
-        
-        plugins: {
-            tooltip: {
-                callbacks: {
-                    title: function (context) {
-                        return `Time: ${context[0].label}`; // Customize the tooltip title
-                    },
                 },
             },
         },

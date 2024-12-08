@@ -1,13 +1,14 @@
 import { fetchWeatherApi } from 'openmeteo';
 
-export async function getWeather(lat=37.554, lng=-122.313){
+// Get an object with the temperatures at a given latitude, longitude point and times corresponding to those temperatures
+export async function getWeather(lat, lng){
     const params = {
-        "latitude": lat,
-        "longitude": lng,
+        "latitude": lat ? lat : 47.612,
+        "longitude": lng ? lng : -122.334,
         "hourly": "temperature_2m",
         "temperature_unit": "fahrenheit",
         "timezone": "America/New_York",
-        "past_days": 3,
+        "past_days": 4,
         "forecast_days": 3
     };
     const url = "https://api.open-meteo.com/v1/forecast";
@@ -40,6 +41,4 @@ export async function getWeather(lat=37.554, lng=-122.313){
     };
 
     return weatherData
-
-
 }
