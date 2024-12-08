@@ -48,6 +48,13 @@ const TempLineGraph = ({ temperatures, times }) => {
             x: {
                 ticks: {
                     callback: (value, index) => (getHourOfIndex(index) % 24 === 0 ? getDayOfIndex(index) : ''),
+                    autoSkip: false,
+                },
+                grid:{
+                    drawOnChartArea: true,
+                    color: (context) => {
+                        return context.tick && context.tick.label ? 'rgba(0,0,0,0.1)' : null
+                    }
                 },
             },
         },

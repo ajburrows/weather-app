@@ -10,13 +10,15 @@ function App() {
   const temperatures = weather.temperature2m
   const times = weather.time
   const zipObj = zipCode && zipCode.length === 5 ? getCoordsFromZip(zipCode) : null
-  const lat = zipObj.lat
-  const lon = zipObj.lon
+  const lat = zipObj ? zipObj.lat : null
+  const lng = zipObj ? zipObj.lng : null
 
-  async function fetchWeather(zipCode) {
+  console.log(zipObj)
+
+  async function fetchWeather() {
     try {
       console.log(`Fetching weather from zip: ${zipCode}`)
-      const data = await getWeather()
+      const data = await getWeather(lat, lng)
       setWeather(data.hourly)
       setZipCode(zipCode)
     } catch(err) {
