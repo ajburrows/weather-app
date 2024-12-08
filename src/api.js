@@ -8,8 +8,8 @@ export async function getWeather(lat, lng){
         "hourly": "temperature_2m",
         "temperature_unit": "fahrenheit",
         "timezone": "America/New_York",
-        "past_days": 4,
-        "forecast_days": 3
+        "past_days": 3,
+        "forecast_days": 4
     };
     const url = "https://api.open-meteo.com/v1/forecast";
     const responses = await fetchWeatherApi(url, params);

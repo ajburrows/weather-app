@@ -24,17 +24,37 @@ ChartJS.register(
 );
 
 //TODO: get current date and time, and render a vertical line on the graph to mark that point
+const datesDictionary = {
+    0: "Sun",
+    1: "Mon",
+    2: "Tue",
+    3: "Wed",
+    4: "Thur",
+    5: "Fri",
+    6: "Sat"
+}
+
 
 const TempLineGraph = ({ temperatures, times }) => {
 
-    function getHourOfIndex(index){
-        const time = times[index]
-        return time.split(" ")[1].substring(0,2)
+    function getPresentTime(){
+        return new Date()
     }
 
+    function getHourOfIndex(index){
+        // add 5 for Eastern Time
+        return times[index].getUTCHours()
+        return (times[index].getHours() + 5) % 24
+    }
+    //Tue[0]: 2, Wed[5]: 3, Sat[85]: 6, Sun[101]: 0, Mon[130]: 1 
     function getDayOfIndex(index){
-        const time = times[index]
-        return time.split(" ")[0].substring(0,5)
+        return datesDictionary[times[index].getUTCDay()]
+    }
+
+    function getLabelString(timesEntry){
+        const entryArr = timesEntry.toUTCString().split(" ")
+        entryArr[entryArr.length - 1] = "EST"
+        return entryArr.join(" ")
     }
 
 
@@ -58,7 +78,7 @@ const TempLineGraph = ({ temperatures, times }) => {
     };
 
     const data = {
-        labels: times,
+        labels: times.map(time => getLabelString(time)),
         datasets: [
         {
             label: 'Temperatures (F)',
