@@ -37,14 +37,31 @@ const datesDictionary = {
 
 const TempLineGraph = ({ temperatures, times }) => {
 
-    function getPresentTime(){
-        return new Date()
+    function isPresentTime(index){
+        const dateObj = new Date()
+        console.log(dateObj)
+        const year = dateObj.getFullYear()
+        const month = dateObj.getMonth()
+        const date = dateObj.getDate()
+        const hour = dateObj.getHours()
+
+        // timestamp of the entry at times[index]
+        const entryTimeStr = times[index].getUTCFullYear() + " " +
+                             times[index].getUTCMonth() + " " + 
+                             times[index].getUTCDate() + " " + 
+                             times[index].getUTCHours()
+        
+        // timestamp of the date object
+        const dateTimeStr = `${year} ${month} ${date} ${hour}`
+        
+        return entryTimeStr == dateTimeStr
     }
+
+    console.log(isPresentTime(84))
 
     function getHourOfIndex(index){
         // add 5 for Eastern Time
         return times[index].getUTCHours()
-        return (times[index].getHours() + 5) % 24
     }
     //Tue[0]: 2, Wed[5]: 3, Sat[85]: 6, Sun[101]: 0, Mon[130]: 1 
     function getDayOfIndex(index){
@@ -70,7 +87,13 @@ const TempLineGraph = ({ temperatures, times }) => {
                     // Only draw a vertical line on the chart background if a label is there
                     drawOnChartArea: true,
                     color: (context) => {
-                        return context.tick && context.tick.label ? 'rgba(0,0,0,0.1)' : null
+                        if (isPresentTime(context.index) === true){
+                            return 'rgba(0,168,220,0.5)'
+                        }
+                        if (context.tick && context.tick.label){
+                            return 'rgba(0,0,0,0.1)'
+                        }
+                        return null
                     }
                 },
             },
@@ -88,7 +111,7 @@ const TempLineGraph = ({ temperatures, times }) => {
             backgroundColor: 'rgba(25,118,210, 0.2)',
             tension: 0.2,
             pointRadius: 2,
-            hoverRadius: 4
+            hoverRadius: 5
         }]
     };
 
