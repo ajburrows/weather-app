@@ -1,4 +1,4 @@
-import { getCurrentTemperature, getHourlyWeather } from "./api"
+import { getCurrentTemperature, getHourlyWeather, getDailyOverview } from "./api"
 import { useEffect, useState } from "react"
 import TempLineGraph from "./TempLineGraph"
 import ZipcodeInput from "./components/ZipcodeInput"
@@ -6,40 +6,28 @@ import { getCoordsFromZip } from "./utils/utils"
 import DailyOverview from "./components/DailyOverview"
 
 function App() {
+  const [dailyOverviewData, setDailyOverviewData] = useState({})
   const [weather, setWeather] = useState({})
   const [zipCode, setZipCode] = useState()
-  const [curTemp, setCurTemp] = useState(58)
   const temperatures = weather.temperature2m
   const times = weather.time
   const zipObj = zipCode && zipCode.length === 5 ? getCoordsFromZip(zipCode) : null
   const lat = zipObj ? zipObj.lat : null
   const lng = zipObj ? zipObj.lng : null
 
-  
-
-  console.log(`zip: ${zipCode}`)
-
   async function fetchWeather() {
     try {
       console.log(`Fetching weather from zip: ${zipCode}`)
-      const data = await getHourlyWeather(lat, lng)
-      setWeather(data.hourly)
+      const hourlyData = await getHourlyWeather(lat, lng)
+      const overviewData = await getDailyOverview(lat, lng)
+      setWeather(hourlyData.hourly)
       setZipCode(zipCode)
-      assignCurrentTemp()
+      setDailyOverviewData(overviewData)
     } catch(err) {
       console.error("Error fetching weather data: ", err)
     }
   }
 
-  async function assignCurrentTemp(){
-    try{
-      console.log(`Fetching current temperature from zip: ${zipCode}`)
-      const data = await getCurrentTemperature(lat, lng)
-      setCurTemp(data.toFixed(1))
-    } catch(err) {
-      console.log("Error fetching current temperatrue: ", err)
-    }
-  }
 
   useEffect(() => {
     fetchWeather()
@@ -57,12 +45,20 @@ function App() {
       <div className="main">
         <section className="data-container">
           {temperatures && times 
-            ? <TempLineGraph temperatures={tempsArray} times={timesArray} city={zipObj.city} state={zipObj.state}/>
+            ? <TempLineGraph
+                temperatures={tempsArray}
+                times={timesArray}
+                city={zipObj ? zipObj.city : "Seattle"}
+                state={zipObj ? zipObj.state : "WA"}/>
             : null
           }
           <div className="data-container-bottom">
             <ZipcodeInput onZipCodeChange={setZipCode} zipCode={zipCode} submitHelper={fetchWeather} />
-            <DailyOverview zipObj={zipObj} curTemp={curTemp} />
+            <DailyOverview 
+              current={dailyOverviewData?.current ? dailyOverviewData.current : null}
+              max={dailyOverviewData?.daily?.temperature2mMax ? dailyOverviewData.daily.temperature2mMax : null}
+              min={dailyOverviewData?.daily?.temperature2mMin ? dailyOverviewData.daily.temperature2mMin : null}
+            />
           </div>
         </section>
       </div>
