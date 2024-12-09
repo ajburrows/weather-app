@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
-    errorElement: <NotFoundPage />,
+    //errorElement: <NotFoundPage />,
     children: [
       {
         path: '/:zipCode',
