@@ -22,7 +22,6 @@ export default function WeatherData() {
         const hourlyData = await getHourlyWeather(lat, lng)
         const overviewData = await getDailyOverview(lat, lng)
         setWeather(hourlyData.hourly)
-        setZipCode(zipCode)
         setDailyOverviewData(overviewData)
         } catch(err) {
         console.error("Error fetching weather data: ", err)
@@ -32,7 +31,7 @@ export default function WeatherData() {
 
     useEffect(() => {
         fetchWeather()
-    }, [])
+    }, [zipCode])
 
     // These arrays contain the data to be plotted. Times are the horizontal axis and temps are the vertical axis
     const tempsArray = temperatures ? Object.values(temperatures) : null
