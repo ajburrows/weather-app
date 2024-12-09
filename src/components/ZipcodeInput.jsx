@@ -13,7 +13,6 @@ function ZipcodeInput({ zipCode, onZipCodeChange, submitHelper }) {
         id="outlined-based"
         label="Zip code"
         variant="outlined"
-        helperText="e.g. 98101"
         value={zipCode}
         onKeyDown={(event) => {event.key === "Enter" ? submitHelper(zipCode) : null}}
         onChange={handleChange}
@@ -23,7 +22,6 @@ function ZipcodeInput({ zipCode, onZipCodeChange, submitHelper }) {
         color="primary"
         onClick={() => submitHelper(zipCode)}
         style={{ marginLeft: "10px",
-                 marginBottom: "20px"
          }}
       >
         Submit

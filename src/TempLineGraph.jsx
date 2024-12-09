@@ -23,7 +23,7 @@ ChartJS.register(
   Legend
 );
 
-//TODO: get current date and time, and render a vertical line on the graph to mark that point
+// Map utc day to a day of the week
 const datesDictionary = {
     0: "Sun",
     1: "Mon",
@@ -34,9 +34,9 @@ const datesDictionary = {
     6: "Sat"
 }
 
-
 const TempLineGraph = ({ temperatures, times, city, state }) => {
 
+    // Return true if the index represents the entry for the current time of day and false otherwise
     function isPresentTime(index){
         const dateObj = new Date()
         const year = dateObj.getFullYear()
@@ -57,21 +57,22 @@ const TempLineGraph = ({ temperatures, times, city, state }) => {
     }
 
 
+    // Return the hour of the entry at the given index
     function getHourOfIndex(index){
-        // add 5 for Eastern Time
         return times[index].getUTCHours()
     }
 
+    // Returns the day of the week (e.g. "Mon")
     function getDayOfIndex(index){
         return datesDictionary[times[index].getUTCDay()]
     }
 
+    // Set the bolded top text of the tooltip that pops up when hovering over a datapoint
     function getLabelString(timesEntry){
         const entryArr = timesEntry.toUTCString().split(" ")
-        entryArr[entryArr.length - 1] = "EST"
+        entryArr[entryArr.length - 1] = "EST" // Change GMT to EST
         return entryArr.join(" ")
     }
-
 
     const options = {
         scales: {
@@ -82,7 +83,7 @@ const TempLineGraph = ({ temperatures, times, city, state }) => {
                     autoSkip: false,
                 },
                 grid:{
-                    // Only draw a vertical line on the chart background if a label is there
+                    // Draw vertical lines to mark the start of each day and the current time
                     drawOnChartArea: true,
                     color: (context) => {
                         if (isPresentTime(context.index) === true){
@@ -96,6 +97,8 @@ const TempLineGraph = ({ temperatures, times, city, state }) => {
                 },
             },
         },
+
+        // Add a title to the graph that displays the city and state e.g. Seattle, WA
         plugins: {
             title: {
                 display: true,
@@ -120,9 +123,9 @@ const TempLineGraph = ({ temperatures, times, city, state }) => {
             fill: false,
             borderColor: 'rgba(25,118,210, 0.8)',
             backgroundColor: 'rgba(25,118,210, 0.2)',
-            tension: 0.2,
-            pointRadius: 2,
-            hoverRadius: 5
+            tension: 0.2, // smooth the curve
+            pointRadius: 2, // size of the data points
+            hoverRadius: 5 // how close cursor is to trigger the tooltip
         }]
     };
 

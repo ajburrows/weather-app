@@ -11,7 +11,7 @@ header {
   box-shadow: 0px 2px 3px 0px rgb(210, 210, 210);
   margin: 0px;
   width: 100vw;
-  padding: 20px;
+    padding: 20px;
 }
 
 header > h1 {
@@ -26,14 +26,20 @@ header > h1 {
 }
 
 .data-container {
-  border: solid rgba(211, 211, 211, 1);
+  display: grid;
+  grid-template-rows: repeat(30, 20px);
+  grid-template-columns: repeat(40, 20px);
   border-radius: 10px;
   padding: 25px;
 }
 
 .line-graph-container {
+  border: solid rgba(211, 211, 211, 1);
+  grid-row: 1 / 20;
+  grid-column: 3 / 42;
   width: 700px;
-  margin-bottom: 30px;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
 .data-container-bottom {
@@ -50,16 +56,21 @@ header > h1 {
 
 /* OVERVIEW COMPONENT */
 .daily-overview {
+  grid-row: 21 / 25;
+  grid-column: 3 / 23;
   display: flex;
+  border: solid rgba(211, 211, 211, 1) 2px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  justify-content: space-between;
 }
 .current-data-container {
-  min-height: 100%;
-  margin-bottom: 20px;
   margin-right: 20px;
 }
 
 .current-data-container > p {
-  text-align: right;
+  text-align: center;
+  margin: 0px;
 }
 .current-data-container .measurement {
   font-size: 36px;
@@ -80,7 +91,31 @@ header > h1 {
   position: relative;
 }
 
+.high-low-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.high-low-container > p{
+  margin: 0px;
+}
+
 .high-low-container .measurement .unit {
   font-size: 12px;
   bottom: 3px;
+}
+
+
+/* ALERTS CONTAINER */
+.alerts-container {
+  border: solid rgba(211, 211, 211, 1) 2px;
+  padding: 10px;
+  border-radius: 10px;
+  grid-row: 21 / 25;
+  grid-column: 25 / 40;
+}
+
+.alerts-container > h3, .alerts-container > p {
+  margin: 0px;
 }
