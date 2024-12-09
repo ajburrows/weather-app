@@ -48,22 +48,39 @@ header > h1 {
   align-items: center;
 }
 
+/* OVERVIEW COMPONENT */
+.daily-overview {
+  display: flex;
+}
 .current-data-container {
   min-height: 100%;
   margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .current-data-container > p {
   text-align: right;
 }
-.current-data-container > p > span {
-  font-weight: 800;
+.current-data-container .measurement {
   font-size: 36px;
 }
 
-.current-data-container > p > span > span {
-  font-weight: 400;
-  font-size: 28px;
+.current-data-container .measurement .unit {
+  font-size: 24px;
   position: relative;
-  bottom: 5px;
+  bottom: 9px;
+}
+
+.measurement {
+  font-weight: 700;
+}
+
+.measurement .unit {
+  font-weight: 400;
+  position: relative;
+}
+
+.high-low-container .measurement .unit {
+  font-size: 12px;
+  bottom: 3px;
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import TempLineGraph from "./TempLineGraph"
 import ZipcodeInput from "./components/ZipcodeInput"
 import { getCoordsFromZip } from "./utils/utils"
-import CurrentData from "./components/CurrentData"
+import DailyOverview from "./components/DailyOverview"
 
 function App() {
   const [weather, setWeather] = useState({})
@@ -62,7 +62,7 @@ function App() {
           }
           <div className="data-container-bottom">
             <ZipcodeInput onZipCodeChange={setZipCode} zipCode={zipCode} submitHelper={fetchWeather} />
-            <CurrentData zipObj={zipObj} curTemp={curTemp} />
+            <DailyOverview zipObj={zipObj} curTemp={curTemp} />
           </div>
         </section>
       </div>
