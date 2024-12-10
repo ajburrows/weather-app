@@ -8,6 +8,7 @@ import './index.css'
 import React from "react"
 import NotFoundPage from "./pages/NotFoundPage"
 import WeatherData from "./components/WeatherData"
+import { elements } from "chart.js"
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,25 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/:zipCode',
-        element: <WeatherData />
+        element: <WeatherData />,
+        children: [
+          {
+            path: '/:zipCode/temperature',
+            element: <WeatherData />
+          },
+          {
+            path: '/:zipCode/rain',
+            element: <WeatherData />
+          },
+          {
+            path: '/:zipCode/wind',
+            element: <WeatherData />
+          },
+          {
+            path: '/:zipCode/snow',
+            element: <WeatherData />
+          }
+        ]
       }
     ]
   },

@@ -23,7 +23,7 @@ export default function HomePage() {
             <ZipcodeInput submitHelper={(zip) => handleZipCodeSubmit(zip)} />
             <div className="dashboard-container">
               <WeatherData zipCode={zipCode}/>
-              <MetricsMenu />
+              <MetricsMenu zipCode={zipCode}/>
             </div>
           </div>
         </>
