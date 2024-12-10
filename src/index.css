@@ -25,12 +25,65 @@ header > h1 {
   padding: 50px;
 }
 
+.dashboard-container {
+  display: flex;
+}
+
+/* METRICS MENU */
+.metrics-menu-container {
+  display: flex;
+  flex-direction: column;
+  border: solid rgba(211, 211, 211, 1) 3px;
+  border-radius: 10px;
+  padding-top: 20px;
+  margin: 25px;
+  margin-left: 0px;
+  height: fit-content;
+  overflow: hidden;
+}
+
+.metrics-menu-container > h2 {
+  margin-top: 0px;
+  text-align: center;
+}
+
+.metrics-menu-container > a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 10px;
+  color: inherit;
+  border-top: solid rgba(211, 211, 211, 1) 1px;
+}
+
+.metrics-menu-container > a:hover {
+    background-color: #d0eaff; /* Light blue background on hover */
+    border-color: #99ccff; /* Subtle blue border on hover */
+}
+
+.metrics-menu-container > a:hover span {
+    transform: scale(1.1); /* Grow the text slightly */
+    transition: transform 0.3s ease; /* Smooth scaling */
+    display: inline-block; /* Ensure transform works properly on inline text */
+    color: #0056b3; /* Slightly darker blue for the text on hover */
+}
+
+.metrics-menu-container > a:active {
+    background-color: #99ccff; /* Darker blue background when clicked */
+    border-color: #6699cc; /* Slightly darker blue border */
+}
+
+.metrics-menu-container > a:active span {
+    transform: scale(0.95); /* Slightly shrink the text to simulate a press */
+    color: #003d80; /* Even darker blue for the text when active */
+}
+
 .data-container {
   display: grid;
-  grid-template-rows: repeat(30, 20px);
+  grid-template-rows: repeat(24, 20px);
   grid-template-columns: repeat(40, 20px);
   border-radius: 10px;
-  padding: 25px;
+  margin: 25px;
+  margin-right: 10px;
 }
 
 .line-graph-container {
@@ -119,3 +172,6 @@ header > h1 {
 .alerts-container > h3, .alerts-container > p {
   margin: 0px;
 }
+
+
+

@@ -1,11 +1,8 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { getHourlyWeather, getDailyOverview } from "../api"
-import { useEffect, useState } from "react"
-import TempLineGraph from "../TempLineGraph"
+import { useNavigate } from "react-router-dom";
+import { useState } from "react"
 import ZipcodeInput from "./ZipcodeInput"
-import { getCoordsFromZip } from "../utils/utils"
-import DailyOverview from "./DailyOverview"
 import WeatherData from "./WeatherData";
+import MetricsMenu from "./MetricsMenu";
 
 export default function HomePage() {
     const [zipCode, setZipCode] = useState(98101)
@@ -24,7 +21,10 @@ export default function HomePage() {
           </header>
           <div className="main">
             <ZipcodeInput submitHelper={(zip) => handleZipCodeSubmit(zip)} />
-            <WeatherData zipCode={zipCode}/>
+            <div className="dashboard-container">
+              <WeatherData zipCode={zipCode}/>
+              <MetricsMenu />
+            </div>
           </div>
         </>
     )

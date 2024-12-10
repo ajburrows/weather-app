@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import TempLineGraph from "../TempLineGraph"
 import { getCoordsFromZip } from "../utils/utils"
 import DailyOverview from "./DailyOverview"
+import Alerts from "./Alerts"
 
 export default function WeatherData() {
     const params = useParams()
@@ -49,17 +50,14 @@ export default function WeatherData() {
             : null
             }
 
+            {console.log("rendering DailyOverview")}
             <DailyOverview 
             current={dailyOverviewData?.current ? dailyOverviewData.current : null}
             max={dailyOverviewData?.daily?.temperature2mMax ? dailyOverviewData.daily.temperature2mMax : null}
             min={dailyOverviewData?.daily?.temperature2mMin ? dailyOverviewData.daily.temperature2mMin : null}
             />
 
-            <div className="alerts-container">
-                <h3>Weather Alerts:</h3>
-                <p>Currently there are no alerts or warnings</p>
-            </div>
-
+            <Alerts />
         </section>
     )
 }

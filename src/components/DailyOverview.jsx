@@ -1,9 +1,6 @@
 
 export default function DailyOverview({ current, max, min }) {
 
-    console.log(current ? current : "null current")
-    console.log(max ? max : "null max")
-    console.log(min ? min : "null min")
     return (
         <div className="daily-overview">
             <div className="current-data-container">
