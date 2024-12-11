@@ -14,6 +14,16 @@ export default function HomePage() {
       navigate(`/${newZipCode}`)
     }
 
+    /*
+      Goal: display the weather data for the selected metric.
+
+      Notes:
+        - When a metric is selected, it is stored in the path after the zipcode
+        - The data for every metric is fetched by the api call
+        - After making the call, construct a data container for every metric
+        - Then just conditionally render the data container that corresponds to the path
+    */
+
     return (
         <>
           <header>

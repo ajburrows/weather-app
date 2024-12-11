@@ -45,16 +45,21 @@ export default function WeatherData() {
     const tempsArray = temperatures ? Object.values(temperatures) : null
     const timesArray = times
 
+    const WeeklyGraphs = {
+        "Temp": <TempLineGraph
+                    temperatures={tempsArray}
+                    times={timesArray}
+                    city={zipObj ? zipObj.city : "Seattle"}
+                    state={zipObj ? zipObj.state : "WA"}
+                />
+    }
+
     return (
 
         <section className="data-container">
             {/*Render the line graph*/}
             {temperatures && times 
-            ? <TempLineGraph
-                temperatures={tempsArray}
-                times={timesArray}
-                city={zipObj ? zipObj.city : "Seattle"}
-                state={zipObj ? zipObj.state : "WA"}/>
+            ? WeeklyGraphs["Temp"]
             : null
             }
 
