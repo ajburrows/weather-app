@@ -1,8 +1,22 @@
 import React, { useRef } from "react";
 import { TextField, Button } from '@mui/material'
 
-function ZipcodeInput({ submitHelper }) {
+function ZipcodeInput({ changeZip }) {
   const textFieldRef = useRef(null)
+
+
+  const validateInput = (value) => {
+    // Check that the user input is an integer with 5 digits
+    return /^\d{5}$/.test(value);
+  };
+
+  const submitHelper = (value) => {
+    if (validateInput(value)) {
+      changeZip(value)
+    } else {
+      console.error("Invalid zip code:", value);
+    }
+  };
 
   return (
     <div className="zip-code-input-form">

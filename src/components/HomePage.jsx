@@ -30,7 +30,7 @@ export default function HomePage() {
             <h1>Recent & Forecasted Weather</h1>
           </header>
           <div className="main">
-            <ZipcodeInput submitHelper={(zip) => handleZipCodeSubmit(zip)} />
+            <ZipcodeInput changeZip={(zip) => handleZipCodeSubmit(zip)} />
             <div className="dashboard-container">
               <WeatherData zipCode={zipCode}/>
               <MetricsMenu zipCode={zipCode}/>
