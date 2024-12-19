@@ -21,19 +21,7 @@ const router = createBrowserRouter([
         element: <WeatherData />,
         children: [
           {
-            path: '/:zipCode/temperature',
-            element: <WeatherData />
-          },
-          {
-            path: '/:zipCode/rain',
-            element: <WeatherData />
-          },
-          {
-            path: '/:zipCode/wind',
-            element: <WeatherData />
-          },
-          {
-            path: '/:zipCode/snow',
+            path: '/:zipCode/:metric',
             element: <WeatherData />
           }
         ]

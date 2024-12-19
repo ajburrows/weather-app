@@ -19,8 +19,12 @@ export default function WeatherData() {
 
     // Weekly data
     const temperatures = weatherData?.hourly ? weatherData.hourly.temperature2m : null
+    const wind = weatherData?.hourly ? weatherData.hourly.windSpeed10m : null
+    const rainProb = weatherData?.hourly ? weatherData.hourly.precipitationProbability : null
+    const rainInches = weatherData?.hourly ? weatherData.hourly.precipitation : null
     const times = weatherData?.hourly?.time ? weatherData.hourly.time : null
 
+    
     // Daily Overview data
     const currentTemp = weatherData?.current ? weatherData.current.temperature2m : null
     const todayMaxTemp = weatherData?.daily ? weatherData.daily.temperature2mMax[3] : null
@@ -43,24 +47,40 @@ export default function WeatherData() {
 
     // These arrays contain the data to be plotted. Times are the horizontal axis and temps are the vertical axis
     const tempsArray = temperatures ? Object.values(temperatures) : null
+    const snowArray = weatherData?.hourly ? weatherData.hourly.snowfall : null
     const timesArray = times
 
     const WeeklyGraphs = {
-        "Temp": <TempLineGraph
+        "temperature": <TempLineGraph
                     temperatures={tempsArray}
+                    times={timesArray}
+                    city={zipObj ? zipObj.city : "Seattle"}
+                    state={zipObj ? zipObj.state : "WA"}
+                />,
+        "snow": <TempLineGraph
+                    temperatures={snowArray}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
                     state={zipObj ? zipObj.state : "WA"}
                 />
     }
 
+    console.log(params)
+
     return (
 
         <section className="data-container">
             {/*Render the line graph*/}
+            {/*
             {temperatures && times 
             ? WeeklyGraphs["Temp"]
             : null
+            }
+            */}
+
+            {params["metric"] && times
+                ? WeeklyGraphs[params["metric"]]
+                : null
             }
 
             <DailyOverview 
