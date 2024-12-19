@@ -19,7 +19,6 @@ export default function WeatherData() {
 
     // Weekly data
     const temperatures = weatherData?.hourly ? weatherData.hourly.temperature2m : null
-    const wind = weatherData?.hourly ? weatherData.hourly.windSpeed10m : null
     const rainProb = weatherData?.hourly ? weatherData.hourly.precipitationProbability : null
     const rainInches = weatherData?.hourly ? weatherData.hourly.precipitation : null
     const times = weatherData?.hourly?.time ? weatherData.hourly.time : null
@@ -48,6 +47,7 @@ export default function WeatherData() {
     // These arrays contain the data to be plotted. Times are the horizontal axis and temps are the vertical axis
     const tempsArray = temperatures ? Object.values(temperatures) : null
     const snowArray = weatherData?.hourly ? weatherData.hourly.snowfall : null
+    const windArray = weatherData?.hourly ? weatherData.hourly.windSpeed10m : null
     const timesArray = times
 
     const WeeklyGraphs = {
@@ -59,6 +59,12 @@ export default function WeatherData() {
                 />,
         "snow": <TempLineGraph
                     temperatures={snowArray}
+                    times={timesArray}
+                    city={zipObj ? zipObj.city : "Seattle"}
+                    state={zipObj ? zipObj.state : "WA"}
+                />,
+        "wind": <TempLineGraph
+                    temperatures={windArray}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
                     state={zipObj ? zipObj.state : "WA"}
