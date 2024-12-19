@@ -34,7 +34,7 @@ const datesDictionary = {
     6: "Sat"
 }
 
-const TempLineGraph = ({ temperatures, times, city, state }) => {
+const TempLineGraph = ({ quantity, probability, times, city, state }) => {
 
     // Return true if the index represents the entry for the current time of day and false otherwise
     function isPresentTime(index){
@@ -96,6 +96,26 @@ const TempLineGraph = ({ temperatures, times, city, state }) => {
                     }
                 },
             },
+            y: {
+                    title: {
+                    display: true,
+                    text: 'Rain Amount (mm)',
+                    },
+                },
+            ...(probability && { // Conditionally add the secondary y-axis
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Rain Probability (%)',
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    }
+                }
+            ),
         },
 
         // Add a title to the graph that displays the city and state e.g. Seattle, WA
@@ -113,20 +133,39 @@ const TempLineGraph = ({ temperatures, times, city, state }) => {
             }
         }
     };
-
-    const data = {
-        labels: times.map(time => getLabelString(time)),
-        datasets: [
+    
+    const datasets = [
         {
-            label: 'Temperatures (F)',
-            data: temperatures,
+            label: 'Temperature (F)',
+            data: quantity,
             fill: false,
             borderColor: 'rgba(25,118,210, 0.8)',
             backgroundColor: 'rgba(25,118,210, 0.2)',
             tension: 0.2, // smooth the curve
             pointRadius: 2, // size of the data points
             hoverRadius: 5 // how close cursor is to trigger the tooltip
-        }]
+        }
+    ];
+
+    // Add the probability dataset only if it exists
+    if (probability) {
+        datasets.push({
+            label: 'Rain Probability (%)',
+            data: probability,
+            yAxisID: 'y1', // Link this dataset to the secondary y-axis
+            fill: false,
+            borderColor: 'rgba(160,32,240, 0.8)',
+            backgroundColor: 'rgba(160,32,240, 0.2)',
+            tension: 0.2,
+            pointRadius: 2,
+            hoverRadius: 5,
+            borderDash: [5, 5],
+        });
+    }
+
+    const data = {
+        labels: times.map(time => getLabelString(time)),
+        datasets: datasets
     };
 
     return (

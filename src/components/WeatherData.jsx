@@ -19,8 +19,6 @@ export default function WeatherData() {
 
     // Weekly data
     const temperatures = weatherData?.hourly ? weatherData.hourly.temperature2m : null
-    const rainProb = weatherData?.hourly ? weatherData.hourly.precipitationProbability : null
-    const rainInches = weatherData?.hourly ? weatherData.hourly.precipitation : null
     const times = weatherData?.hourly?.time ? weatherData.hourly.time : null
 
     
@@ -48,42 +46,43 @@ export default function WeatherData() {
     const tempsArray = temperatures ? Object.values(temperatures) : null
     const snowArray = weatherData?.hourly ? weatherData.hourly.snowfall : null
     const windArray = weatherData?.hourly ? weatherData.hourly.windSpeed10m : null
+    const rainProbArray = weatherData?.hourly ? weatherData.hourly.precipitationProbability : null
+    const rainInchesArray = weatherData?.hourly ? weatherData.hourly.precipitation : null
     const timesArray = times
 
     const WeeklyGraphs = {
         "temperature": <TempLineGraph
-                    temperatures={tempsArray}
+                    quantity={tempsArray}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
                     state={zipObj ? zipObj.state : "WA"}
                 />,
         "snow": <TempLineGraph
-                    temperatures={snowArray}
+                    quantity={snowArray}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
                     state={zipObj ? zipObj.state : "WA"}
                 />,
         "wind": <TempLineGraph
-                    temperatures={windArray}
+                    quantity={windArray}
+                    times={timesArray}
+                    city={zipObj ? zipObj.city : "Seattle"}
+                    state={zipObj ? zipObj.state : "WA"}
+                />,
+        "rain": <TempLineGraph
+                    quantity={rainInchesArray}
+                    probability={rainProbArray}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
                     state={zipObj ? zipObj.state : "WA"}
                 />
     }
 
-    console.log(params)
 
     return (
 
         <section className="data-container">
             {/*Render the line graph*/}
-            {/*
-            {temperatures && times 
-            ? WeeklyGraphs["Temp"]
-            : null
-            }
-            */}
-
             {params["metric"] && times
                 ? WeeklyGraphs[params["metric"]]
                 : null
