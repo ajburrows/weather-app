@@ -7,13 +7,12 @@ import DailyOverview from "./DailyOverview"
 import Alerts from "./Alerts"
 
 export default function WeatherData() {
-    const params = useParams()
-    const zipCode = params.zipCode
+    const { zipCode, metric } = useParams()
 
     const [weatherData, setWeatherData] = useState({})
 
     // Locational data
-    const zipObj = zipCode && zipCode.length === 5 ? getCoordsFromZip(zipCode) : null
+    const zipObj = zipCode && zipCode.length === 5 ? getCoordsFromZip(zipCode) : 98101
     const lat = zipObj ? zipObj.lat : null
     const lng = zipObj ? zipObj.lng : null
 
@@ -52,6 +51,7 @@ export default function WeatherData() {
 
     const WeeklyGraphs = {
         "temperature": <TempLineGraph
+                    index
                     quantity={tempsArray}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
@@ -83,9 +83,9 @@ export default function WeatherData() {
 
         <section className="data-container">
             {/*Render the line graph*/}
-            {params["metric"] && times
-                ? WeeklyGraphs[params["metric"]]
-                : null
+            {metric
+                ? WeeklyGraphs[metric]
+                : WeeklyGraphs["temperature"]
             }
 
             <DailyOverview 
