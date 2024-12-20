@@ -53,24 +53,28 @@ export default function WeatherData() {
         "temperature": <TempLineGraph
                     index
                     quantity={tempsArray}
+                    quantityLabel={"Temperature (F)"}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
                     state={zipObj ? zipObj.state : "WA"}
                 />,
         "snow": <TempLineGraph
                     quantity={snowArray}
+                    quantityLabel={"Snow (in)"}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
                     state={zipObj ? zipObj.state : "WA"}
                 />,
         "wind": <TempLineGraph
                     quantity={windArray}
+                    quantityLabel={"Wind Speed (mph)"}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
                     state={zipObj ? zipObj.state : "WA"}
                 />,
         "rain": <TempLineGraph
                     quantity={rainInchesArray}
+                    quantityLabel={"Rain (in)"}
                     probability={rainProbArray}
                     times={timesArray}
                     city={zipObj ? zipObj.city : "Seattle"}
@@ -83,9 +87,9 @@ export default function WeatherData() {
 
         <section className="data-container">
             {/*Render the line graph*/}
-            {metric
-                ? WeeklyGraphs[metric]
-                : WeeklyGraphs["temperature"]
+            {times
+                ? WeeklyGraphs[metric ? metric : "temperature"]
+                : null
             }
 
             <DailyOverview 

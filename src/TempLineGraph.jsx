@@ -34,7 +34,7 @@ const datesDictionary = {
     6: "Sat"
 }
 
-const TempLineGraph = ({ quantity, probability, times, city, state }) => {
+const TempLineGraph = ({ quantity, quantityLabel, probability, times, city, state }) => {
 
     // Return true if the index represents the entry for the current time of day and false otherwise
     function isPresentTime(index){
@@ -99,7 +99,7 @@ const TempLineGraph = ({ quantity, probability, times, city, state }) => {
             y: {
                     title: {
                     display: true,
-                    text: 'Rain Amount (mm)',
+                    text: quantityLabel,
                     },
                 },
             ...(probability && { // Conditionally add the secondary y-axis
@@ -136,7 +136,7 @@ const TempLineGraph = ({ quantity, probability, times, city, state }) => {
     
     const datasets = [
         {
-            label: 'Temperature (F)',
+            label: quantityLabel,
             data: quantity,
             fill: false,
             borderColor: 'rgba(25,118,210, 0.8)',
@@ -150,7 +150,7 @@ const TempLineGraph = ({ quantity, probability, times, city, state }) => {
     // Add the probability dataset only if it exists
     if (probability) {
         datasets.push({
-            label: 'Rain Probability (%)',
+            label: 'Probability (%)',
             data: probability,
             yAxisID: 'y1', // Link this dataset to the secondary y-axis
             fill: false,
