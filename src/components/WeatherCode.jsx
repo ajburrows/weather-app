@@ -4,6 +4,37 @@ import { TiWeatherSunny, TiWeatherPartlySunny, TiWeatherCloudy, TiWeatherShower,
 
 
 const weatherCodeIcons = {
+    '0': <TiWeatherSunny />,
+    '1': <TiWeatherSunny />,
+    '2': <TiWeatherPartlySunny />,
+    '3': <TiWeatherCloudy />,
+    '45': <TiWeatherCloudy />,
+    '48': <TiWeatherCloudy />,
+    '51': <TiWeatherShower />,
+    '53': <TiWeatherShower />,
+    '55': <TiWeatherShower />,
+    '56': <TiWeatherShower />,
+    '57': <TiWeatherShower />,
+    '61': <TiWeatherShower />,
+    '63': <TiWeatherShower />,
+    '65': <TiWeatherDownpour />,
+    '66': <TiWeatherShower />,
+    '67': <TiWeatherDownpour />,
+    '73': <TiWeatherSnow />,
+    '71': <TiWeatherSnow />,
+    '75': <TiWeatherSnow />,
+    '77': <TiWeatherSnow />,
+    '80': <TiWeatherShower />,
+    '81': <TiWeatherShower />,
+    '82': <TiWeatherDownpour />,
+    '85': <TiWeatherSnow />,
+    '86': <TiWeatherSnow />,
+    '96': <TiWeatherStormy />,
+    '95': <TiWeatherStormy />,
+    '99': <TiWeatherStormy />
+}
+
+const weatherCodeLabels = {
     '0': "Clear skies",
     '1': "Mainly clear",
     '2': "Partly cloudy",
@@ -38,9 +69,8 @@ export default function WeatherCode( {code}) {
     console.log("code ", code)
     return(
         <div className="weather-code-container">
-            <h3>Weather Code:</h3>
-            <p></p>
-            <div>{weatherCodeIcons[code]}</div>
+            <h3>Weather Code: <br /><span>{weatherCodeLabels[code]}</span></h3>
+            {weatherCodeIcons[code]}
         </div>
     )
 }
