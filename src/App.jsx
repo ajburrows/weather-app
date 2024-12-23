@@ -9,7 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage"
 import WeatherData from "./components/WeatherData"
 import { elements } from "chart.js"
 
-// TODO: vertical axis labels on hourly charts
+// TODO: add footer with with data sources
 const router = createBrowserRouter([
   {
     path: '/',
