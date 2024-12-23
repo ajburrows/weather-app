@@ -3,6 +3,7 @@ import { useState } from "react"
 import ZipcodeInput from "./ZipcodeInput"
 import WeatherData from "./WeatherData";
 import MetricsMenu from "./MetricsMenu";
+import Footer from "./Footer";
 
 export default function HomePage() {
     const [zipCode, setZipCode] = useState(98101)
@@ -28,6 +29,7 @@ export default function HomePage() {
               <MetricsMenu zipCode={zipCode}/>
             </div>
           </div>
+          <Footer />
         </>
     )
 }
