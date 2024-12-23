@@ -122,7 +122,7 @@ const TempLineGraph = ({ quantity, quantityLabel, probability, times, city, stat
         plugins: {
             title: {
                 display: true,
-                text: `${city}, ${state}`,
+                text: `${city ? city : "Seattle"}, ${state ? state : "WA"}`,
                 font: {
                     size: 20,
                     family: "Inter"
