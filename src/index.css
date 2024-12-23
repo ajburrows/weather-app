@@ -160,8 +160,8 @@ header > h1 {
 }
 
 
-/* ALERTS CONTAINER */
-.alerts-container {
+/* WEATHER-CODE CONTAINER */
+.weather-code-container {
   border: solid rgba(211, 211, 211, 1) 2px;
   padding: 10px;
   border-radius: 10px;
@@ -169,7 +169,7 @@ header > h1 {
   grid-column: 25 / 40;
 }
 
-.alerts-container > h3, .alerts-container > p {
+.weather-code-container > h3, .weather-code-container > p {
   margin: 0px;
 }
 

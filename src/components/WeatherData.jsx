@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import TempLineGraph from "../TempLineGraph"
 import { getCoordsFromZip } from "../utils/utils"
 import DailyOverview from "./DailyOverview"
-import Alerts from "./Alerts"
+import WeatherCode from "./WeatherCode"
 
 export default function WeatherData() {
     const { zipCode, metric } = useParams()
@@ -25,6 +25,9 @@ export default function WeatherData() {
     const currentTemp = weatherData?.current ? weatherData.current.temperature2m : null
     const todayMaxTemp = weatherData?.daily ? weatherData.daily.temperature2mMax[3] : null
     const todayMinTemp = weatherData?.daily ? weatherData.daily.temperature2mMin[3] : null
+
+    // Weather Code
+    const weatherCode = weatherData?.current ? weatherData.current.weatherCode : 0
 
 
     async function fetchAllData() {
@@ -83,6 +86,8 @@ export default function WeatherData() {
     }
 
 
+
+
     return (
 
         <section className="data-container">
@@ -98,7 +103,7 @@ export default function WeatherData() {
                 min={todayMinTemp}
             />
 
-            <Alerts />
+            <WeatherCode code={weatherCode}/>
         </section>
     )
 }

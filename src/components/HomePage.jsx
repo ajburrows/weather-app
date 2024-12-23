@@ -13,7 +13,6 @@ export default function HomePage() {
     function handleZipCodeSubmit(newZipCode){
       setZipCode(newZipCode)
       const navPath = params.metric ? `/${newZipCode}/${params.metric}` : `/${newZipCode}`
-      console.log(navPath)
       navigate(navPath)
     }
 
